@@ -15,10 +15,10 @@
 		- axios
 
 - backend
-	-    DB & ORM
-		-  alembic
-	    - asyncmy
-	    - sqlmodel
+	- data
+		- alembic
+	    	- asyncmy
+	    	- sqlmodel
 	   
 	- API
 		- uvicorn
