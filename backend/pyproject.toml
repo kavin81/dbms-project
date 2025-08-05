@@ -1,0 +1,21 @@
+[project]
+name = "backend"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+dependencies = [
+    # DB & ORM
+    "alembic>=1.16.4",
+    "asyncmy>=0.2.10",
+    "sqlmodel>=0.0.24",
+    # API
+    "uvicorn[standard]>=0.35.0",
+    "fastapi>=0.116.1",
+    "python-multipart>=0.0.20",
+    # auth
+    "argon2-cffi>=25.1.0",
+    # validation
+    "pydantic[email]>=2.11.7",
+    "pydantic-settings>=2.10.1",
+    "cryptography>=45.0.5",
+]

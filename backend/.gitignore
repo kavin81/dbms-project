@@ -1,0 +1,14 @@
+# auto-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# venvs
+.venv/
+.uv_cache/
+
+# alembic
+migrations/versions/
