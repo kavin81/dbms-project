@@ -1,3 +1,8 @@
+# Password Manager - DB Schema
+
+<img width="1302" height="1490" alt="pwd_manager" src="https://github.com/user-attachments/assets/057933da-485a-4f44-a86a-7419c743bb8e" />
+
+
 # Password Manager – Tech Stack
 
 | Layer       | Category         | Tool/Library       | Purpose              |
