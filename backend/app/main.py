@@ -1,31 +1,29 @@
+# types
+from typing import AsyncGenerator
 from contextlib import asynccontextmanager
-from typing import Any, AsyncGenerator
-from fastapi import Depends, FastAPI
+
+# web API imports
 import uvicorn
-from sqlmodel import text
-from core.database import engine, get_session, AsyncSession
+from fastapi import FastAPI
+
+# application logic
+from core.database import dispose
+from scheduler import start_scheduler, run_cleanup
+from api import router
 
 
 @asynccontextmanager
-async def lifespan(_: FastAPI) -> AsyncGenerator[None, Any]:
+async def lifespan(_: FastAPI) -> AsyncGenerator:
+    # on_startup
+    await run_cleanup()
+    start_scheduler()
     yield
-    await engine.dispose()
+    # on_shutdown
+    await dispose()
 
 
 app = FastAPI(lifespan=lifespan)
-
-
-# return information about mysql db
-@app.get("/")
-async def read_root(session: AsyncSession = Depends(get_session)):
-    db_info = await session.exec(statement=text("SELECT DATABASE()"))
-    db_metadata = await session.exec(statement=text("SELECT VERSION()"))
-
-    return {
-        "database": db_info.scalar(),
-        "version": db_metadata.scalar(),
-    }
-
+app.include_router(router)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", port=8000, reload=True)

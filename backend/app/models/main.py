@@ -11,6 +11,18 @@ class User(SQLModel, table=True):
     created_at: str = Field(default=lambda: datetime.now(timezone.utc), nullable=False)
 
 
+class BlacklistToken(SQLModel, table=True):
+    __tablename__: str = "blacklist_tokens"
+
+    id: int = Field(default=None, primary_key=True)
+    user_id: str = Field(foreign_key="users.id", nullable=False)
+    token: str = Field(index=True, unique=True, nullable=False)
+    blacklisted_at: datetime = Field(
+        default=lambda: datetime.now(timezone.utc), nullable=False
+    )
+    expires_at: datetime = Field(nullable=False)
+
+
 class Vault(SQLModel, table=True):
     __tablename__: str = "vaults"
 
@@ -40,6 +52,6 @@ class Tag(SQLModel, table=True):
 
 class EntryTagLink(SQLModel, table=True):
     __tablename__: str = "entry_tag_links"
-    
+
     entry_id: int = Field(foreign_key="password_entries.id", primary_key=True)
     tag_id: int = Field(foreign_key="tags.id", primary_key=True)

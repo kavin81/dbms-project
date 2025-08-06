@@ -1,4 +1,4 @@
-from models.main import User, Vault, PasswordEntry, Tag, EntryTagLink
+from models.main import User, BlacklistToken, Vault, PasswordEntry, Tag, EntryTagLink
 
 
-__all__ = ["User", "Vault", "PasswordEntry", "Tag", "EntryTagLink"]
+__all__ = ["User", "BlacklistToken", "Vault", "PasswordEntry", "Tag", "EntryTagLink"]
